@@ -326,3 +326,80 @@ print(test_function())
 #### #Функция вернула int
 print(test_function())
 #### #10
+
+--------------------------------------
+# Task16
+
+Условие: Представьте: у вас есть веб-приложение, которое позволяет администраторам создавать, просматривать и управлять данными о пользователях. Необходимо удостовериться, что приложение корректно обрабатывает данные пользователей и предоставляет правильную функциональность для работы с ними.
+Для начала вам необходимо реализовать функции для обработки данных о пользователе:
+
+• calculate_age(birth_date: str) -> int: Функция позволяет вычислить возраст пользователя на основе его даты рождения. В контексте тестирования веб-приложения можно использовать эту функцию для проверки, корректно ли возраст пользователя отображается в его профиле. Здесь вам понадобится модуль datetime. Дата рождения всегда будет поступать в формате «год-день-месяц».
+• filter_adults(users: List[Dict[str, Any]]) -> List[Dict[str, Any]]: Функция фильтрует список пользователей и возвращает только совершеннолетних. При тестировании приложения можно передать список пользователей в эту функцию и проверить, что она правильно фильтрует данные и возвращает только совершеннолетних пользователей.
+• generate_username(first_name: str, last_name: str) -> str: Функция генерирует уникальное имя пользователя на основе его имени и фамилии. В контексте тестирования можно использовать эту функцию для проверки, что создаваемые имена пользователей уникальны и соответствуют заданному формату. Принцип генерирования заключается в следующем: первая буква имени + точка + фамилия, при этом все символы должны быть нижнего регистра.
+
+Пример использования:
+
+
+print(calculate_age("1990-05-15"))
+#### #33
+users_data = [{'first_name': 'John', 'last_name': 'Doe', 'birth_date': '1990-05-15'},
+              {'first_name': 'Bob', 'last_name': 'Johnson', 'birth_date': '1985-10-22'},
+              {'first_name': 'Lev', 'last_name': 'Sergeev', 'birth_date': '2015-01-01'}]
+
+print(filter_adults(users_data))
+####  #[{'first_name': 'John', 'last_name': 'Doe', 'birth_date': '1990-05-15'}, {'first_name': 'Bob', 'last_name': 'Johnson', 'birth_date': '1985-10-22'}]
+print(generate_username("John", "Doe"))
+#### #"j.doe"
+Стартовый код:
+
+
+from datetime import date
+from typing import List, Dict, Any
+
+def calculate_age(birth_date: str) -> int:
+    ...
+def filter_adults(users: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    ...
+def generate_username(first_name: str, last_name: str) -> str:
+    ...
+
+-----------------------------------
+# Task17
+
+Условие: Чтобы усовершенствовать тестирование, реализуйте следующий набор функций:
+
+• convert_to_full_name(users: List[Dict[str, Any]]) -> List[str]:
+Функция преобразует список словарей с данными о пользователях в список строк с полными именами. В контексте тестирования можно использовать эту функцию для проверки, что данные о пользователях правильно преобразуются перед отображением на веб-странице.
+• find_matching_emails(users1: List[Dict[str, Any]], users2: List[Dict[str, Any]]) -> set:
+Функция находит уникальные имейлы, которые есть и в первом, и во втором списке пользователей. В контексте тестирования можно использовать эту функцию для проверки, что два списка пользователей корректно объединяются, и находятся только уникальные имейлы.
+• combine_user_data(users: List[Dict[str, Any]]) -> Dict[str, List[Any]]:
+Функция объединяет данные о пользователях из разных списков в один словарь, где ключами будут поля из словарей, а значениями — списки соответствующих значений полей. В контексте тестирования можно использовать эту функцию для проверки, что данные о пользователях правильно объединяются перед обновлением в базе данных приложения.
+
+Пример использования:
+
+
+users_data = [{'first_name': 'John', 'last_name': 'Doe', 'birth_date': '1990-05-15', 'email': 'johndoe@gmail.com'},
+             {'first_name': 'Bob', 'last_name': 'Johnson', 'birth_date': '1985-10-22', 'email': 'bobJ@gmail.com'},
+             {'first_name': 'Lev', 'last_name': 'Sergeev', 'birth_date': '2015-01-01', 'email': 'lev46@gmail.com'}]
+
+users_data_ext = [{'first_name': 'John', 'last_name': 'Doe', 'birth_date': '1990-05-15', 'email': 'johndoe@gmail.com'}]
+
+print(convert_to_full_name(users_data))
+#### #['John Doe', 'Bob Johnson', 'Lev Sergeev']
+print(find_matching_emails(users_data, users_data_ext))
+#### #{'johndoe@gmail.com'}
+print(combine_user_data(users_data))
+#### #{'first_name': ('John', 'Bob', 'Lev'), 'last_name': ('Doe', 'Johnson', 'Sergeev'), 'birth_date': ('1990-05-15', '1985-10-22', '2015-01-01'), 'email': ('johndoe@gmail.com', 'bobJ@gmail.com', 'lev46@gmail.com')}
+Стартовый код:
+
+
+from typing import List, Dict, Any
+#### #А также вам наверняка может понадобиться модуль functools...
+
+def convert_to_full_name(users: List[Dict[str, Any]]) -> List[str]:
+    ...
+def find_matching_emails(users1: List[Dict[str, Any]], users2: List[Dict[str, Any]]) -> set:
+    ...
+def combine_user_data(users: List[Dict[str, Any]]) -> Dict[str, List[Any]]:
+    ...
+-----------------------------------------------
