@@ -1,7 +1,8 @@
 import time
+from typing import Callable
 
 
-def timeit(func):
+def timeit(func: Callable):
     def wrapper(*args, **kwargs):
         start = time.time()
         res = func(*args, **kwargs)
